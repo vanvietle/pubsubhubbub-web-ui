@@ -24,10 +24,11 @@ export default function PubSubPage(): JSX.Element {
     setChannelId(null);
 
     try {
-      const res = await axios.post(`${backendBase}/api/subscribe`, {
-        channelUrl: url.trim(),
-        retries: 3,
-      });
+      const res = await axios.get(`${backendBase}/api/v1/notification/subscribe`, {
+        params: {
+        clientId: crypto.randomUUID(),
+      },
+  });
 
       if (res.data?.channelId) {
         setChannelId(res.data.channelId);
